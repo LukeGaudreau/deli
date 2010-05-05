@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>img{ height: 100px; float: left; }</style>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+	<div id="posts">
+
+</div>
+<script>
+var user="hkslibrary"
+var tags=["united_states","international"];
+$.each(tags, function(i, tag) {
+
+var url="http://feeds.delicious.com/v2/json/" + user + "/freesource+" + tag + "?count=15&callback=?";
+$.getJSON(url,
+        function(data){
+          $("<h3>" + tag + "</h3>").appendTo("#posts");
+          $.each(data, function(i,item){
+            $("<a>" + item.d + "</a>").attr("href", item.u).appendTo("#posts");
+            $("<p>" + item.n + "</p>").appendTo("#posts");
+          });
+        });
+    });</script>
+</body>
+</html>
